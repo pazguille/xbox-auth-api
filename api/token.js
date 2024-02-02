@@ -6,16 +6,20 @@ import {
   exchangeTokenForXSTSToken,
 } from '@/utils/auth.js';
 import cors from '@/utils/cors.js';
+import { load } from "https://deno.land/std@0.214.0/dotenv/mod.ts";
+
+const env = await load();
 
 const schema = Joi.object({
   auth: Joi.boolean().default(false),
   code: Joi.string(),
 }).or('auth', 'code');
 
-const clientId = 'e32e38f6-fcbc-4775-83d8-8981c29bcfc9';
-const redirectUri = 'http://localhost:8081/api/token';
+// const redirectUri = 'http://localhost:8081/api/token';
+const redirectUri = 'https://auth.xstoregames.com/api/token';
 const scope = 'XboxLive.signin XboxLive.offline_access';
-const secretId = 'fh08Q~yK6MmQw4hF~GDqzNSboNOwkdTX9Aemecvw';
+const clientId = env['CLIENT_ID'] || Deno.env.get('CLIENT_ID');
+const secretId = env['SECRET_ID'] || Deno.env.get('SECRET_ID');
 
 export default async (ctx) => {
   const { value: query, error } = schema.validate(ctx.searchParams);

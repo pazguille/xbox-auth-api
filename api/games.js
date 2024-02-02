@@ -2,7 +2,6 @@ import Joi from 'joi';
 import fetchUserGames from '@/utils/fetch-user-games.js';
 import cors from '@/utils/cors.js';
 
-
 const cookieSchema = Joi.object({
   xuid: Joi.string().required(),
   token: Joi.string().required(),
