@@ -70,9 +70,9 @@ export default async (ctx) => {
     };
 
     const authHeaders = new Headers({ ...cors });
-    authHeaders.append('Set-Cookie', `nickname=${data.nickname}; Path=/; Secure; SameSite=Strict; Expires=${new Date(user.NotAfter).toUTCString()}`);
-    authHeaders.append('Set-Cookie', `xuid=${data.xuid}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${new Date(user.NotAfter).toUTCString()}`);
-    authHeaders.append('Set-Cookie', `token=${encodeURIComponent(data.token)}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${new Date(user.NotAfter).toUTCString()}`);
+    authHeaders.append('Set-Cookie', `nickname=${data.nickname}; Domain=.xstoregames.com Path=/; Secure; SameSite=Strict; Expires=${new Date(user.NotAfter).toUTCString()}`);
+    authHeaders.append('Set-Cookie', `xuid=${data.xuid}; Domain=.xstoregames.com Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${new Date(user.NotAfter).toUTCString()}`);
+    authHeaders.append('Set-Cookie', `token=${encodeURIComponent(data.token)}; Domain=.xstoregames.com Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${new Date(user.NotAfter).toUTCString()}`);
     authHeaders.append('Cache-Control', 'public, no-store, max-age=0');
 
     return Response.json(data, {
