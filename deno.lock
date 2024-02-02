@@ -1,0 +1,29 @@
+{
+  "version": "3",
+  "redirects": {
+    "https://deno.land/x/acorn/mod.ts": "https://deno.land/x/acorn@0.1.1/mod.ts"
+  },
+  "remote": {
+    "https://deno.land/std@0.152.0/http/_negotiation/common.ts": "410e902f01cdd324e4746e8017595be4fc357d6fc4cd6044f2f808a943d7eaf7",
+    "https://deno.land/std@0.152.0/http/_negotiation/encoding.ts": "f749c1d539d139af783e8a7741de5a47a98a5e3c9af82b8af512567ccf5fe632",
+    "https://deno.land/std@0.152.0/http/_negotiation/language.ts": "53c306186904d2dace4c624a8822542866ad332a7f40ac90e0af1504f95c63d0",
+    "https://deno.land/std@0.152.0/http/_negotiation/media_type.ts": "ecdda87286495f7ff25116858f5088856953e2f1585e593d314e0c71b826a137",
+    "https://deno.land/std@0.152.0/http/http_errors.ts": "fe9b7f95f7ee0592c3306f8c7aed03ba53d55d1ef81e00041c1171b9588f46d9",
+    "https://deno.land/std@0.152.0/http/http_status.ts": "897575a7d6bc2b9123f6a38ecbc0f03d95a532c5d92029315dc9f508e12526b8",
+    "https://deno.land/std@0.152.0/http/negotiation.ts": "f35b1ff2ad4ff9feaa00ac234960b398172768205c8eceaef7f2eafe34716ba2",
+    "https://deno.land/std@0.152.0/media_types/_util.ts": "ce9b4fc4ba1c447dafab619055e20fd88236ca6bdd7834a21f98bd193c3fbfa1",
+    "https://deno.land/std@0.152.0/media_types/mod.ts": "3829264ca0610cac40f3214f939d7733483523f82bc1041c51045d7c75fb93b8",
+    "https://deno.land/std@0.152.0/media_types/vendor/mime-db.v1.52.0.ts": "724cee25fa40f1a52d3937d6b4fbbfdd7791ff55e1b7ac08d9319d5632c7f5af",
+    "https://deno.land/x/acorn@0.1.1/context.ts": "55549de5b6c69a3630006ae819429af6887344b6cb392fe49598f8ef1cad19e1",
+    "https://deno.land/x/acorn@0.1.1/deps.ts": "02652ef382544f2ee0f233486ed2de4153def47db43e7b5158c4bab24998d012",
+    "https://deno.land/x/acorn@0.1.1/handlers.ts": "173eb1e7f72f86d0aab24f8780d02734b5a9d4a6fea10d0e22883146081f80c1",
+    "https://deno.land/x/acorn@0.1.1/http_server_flash.ts": "41e6ceb95f04063a7e627aeb592d5ee226d6e39879e38e94f2453bfe4412950f",
+    "https://deno.land/x/acorn@0.1.1/http_server_native.ts": "19052fb8c44fe30040a67651ecbfca94c9d1cc913e5d1274c020a2555ebc4e81",
+    "https://deno.land/x/acorn@0.1.1/mod.ts": "6d3b12d6f30bb970ff513d649fae6f27141535af5d5c55b104a1d30248ead15c",
+    "https://deno.land/x/acorn@0.1.1/router.ts": "2242aeba78088e3038b50d7eb45db228bbead16c1a07666e125ecca00f67450c",
+    "https://deno.land/x/acorn@0.1.1/util.ts": "161ca128f5698f4bdd10447cbceec65b8c196aa4cc6b416b8a3a1a0a5f5b6c4d",
+    "https://deno.land/x/oak_commons@0.3.1/cookies.ts": "c82f25404e7854e6f0616e8feede7e9bb00fb1d73009213ed91c765446ef7743",
+    "https://esm.sh/joi@17.8.3": "c628fa625588c2026eff0d46e2eb36da1b462d7e88053574d94b7f379f61e9ab",
+    "https://esm.sh/v111/joi@17.8.3/deno/joi.js": "959d62378500484f3539478d3de9f4141a0939f00d764435dea64fcd40855517"
+  }
+}
