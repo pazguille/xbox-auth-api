@@ -10,6 +10,7 @@ const cookieSchema = Joi.object({
 const paramsSchema = Joi.object({
   lang: Joi.string().default('es'),
   store: Joi.string().default('ar'),
+  gamertag: Joi.string(),
 });
 
 export default async (ctx) => {
@@ -27,7 +28,7 @@ export default async (ctx) => {
     })), { status: 400 });
   }
 
-  const results = await fetchUserDetail(xuid, token, query.lang, query.store);
+  const results = await fetchUserDetail(xuid, token, query.lang, query.store, query.gamertag);
 
   return Response.json(results, {
     status: results.code || 200,

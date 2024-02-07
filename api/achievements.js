@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import fetchUserClips from '@/utils/fetch-user-clips.js';
+import fetchUserAchievements from '@/utils/fetch-user-achievements.js';
 import cors from '@/utils/cors.js';
 
 const cookieSchema = Joi.object({
@@ -8,9 +8,7 @@ const cookieSchema = Joi.object({
 });
 
 const paramsSchema = Joi.object({
-  limit: Joi.number().default(100),
-  trending: Joi.boolean().default(false),
-  titleId: Joi.string(),
+  titleId: Joi.string().required(),
   lang: Joi.string().default('es'),
   store: Joi.string().default('ar'),
 });
@@ -30,7 +28,15 @@ export default async (ctx) => {
     })), { status: 400 });
   }
 
-  const results = await fetchUserClips(xuid, token, query.lang, query.store, query.limit, query.trending, query.titleId);
+  if (error) {
+    return Response.json(error.details.map(err => ({
+      param: err.path,
+      type: err.type,
+      message: err.message,
+    })), { status: 400 });
+  }
+
+  const results = await fetchUserAchievements(xuid, token, query.titleId, query.lang, query.store);
 
   return Response.json(results, {
     status: results.code || 200,

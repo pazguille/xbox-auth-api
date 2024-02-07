@@ -1,9 +1,10 @@
 const API_URL = (xuid, limit) => `https://gameclipsmetadata.xboxlive.com/users/xuid(${xuid})/clips?maxItems=${limit}`;
-const PUBLIC_API_URL = (limit) => `https://gameclipsmetadata.xboxlive.com/public/trending/clips?qualifier=created&skipItems=1&maxItems=${limit}`;
+const PUBLIC_API_URL = (limit) => `https://gameclipsmetadata.xboxlive.com/public/trending/clips?qualifier=created&skipItems=0&maxItems=${limit}`;
+const TITLE_API_URL = (titleId, limit) => `https://gameclipsmetadata.xboxlive.com/public/titles/${titleId}/clips?qualifier=created&skipItems=0&maxItems=${limit}`;
 
-export default async function fetchUserClips(xuid, token, lang, store, limit, trending) {
+export default async function fetchUserClips(xuid, token, lang, store, limit, trending, titleId) {
   try {
-    const url = trending ? PUBLIC_API_URL(limit) : API_URL(xuid, limit);
+    const url = trending ? PUBLIC_API_URL(limit) : (titleId ? TITLE_API_URL(titleId, limit) : API_URL(xuid, limit));
     return await fetch(url, {
       method: 'GET',
       headers: {

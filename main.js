@@ -4,6 +4,7 @@ import token from '@/api/token.js';
 import user from '@/api/user.js';
 import games from '@/api/games.js';
 import clips from '@/api/clips.js';
+import achievements from '@/api/achievements.js';
 
 const app = new Router();
 
@@ -13,5 +14,6 @@ app.get('/api/token', token);
 app.get('/api/user', user);
 app.get('/api/games', games);
 app.get('/api/clips', clips);
+app.get('/api/achievements', achievements);
 
 app.listen({ port: Deno.env.get('PORT') || 8081 });
