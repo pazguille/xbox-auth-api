@@ -31,7 +31,7 @@ export default async function fetchUserGames(xuid, token, lang, store) {
         description: game.detail.description,
         images: {
           boxart: {
-            url: game.displayImage,
+            url: game.displayImage.replace('http', 'https'),
             type: 'boxart',
           },
         },
