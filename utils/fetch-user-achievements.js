@@ -38,6 +38,7 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
         return {
           title: achievement.titleAssociations[0].name,
           titleId: achievement.titleAssociations[0].id,
+          state: achievement.progressState,
           name: achievement.name,
           description: achievement.description,
           image: `https://images.weserv.nl/?output=webp&url=${achievement.mediaAssets[0].url}`,
