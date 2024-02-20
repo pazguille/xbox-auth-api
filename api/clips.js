@@ -9,7 +9,7 @@ const cookieSchema = Joi.object({
 
 const paramsSchema = Joi.object({
   gamertag: Joi.string(),
-  count: Joi.number().default(10),
+  count: Joi.number(),
   trending: Joi.boolean().default(false),
   titleId: Joi.string(),
   lang: Joi.string().default('es'),

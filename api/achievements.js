@@ -11,7 +11,7 @@ const paramsSchema = Joi.object({
   titleId: Joi.string(),
   gamertag: Joi.string(),
   skipitems: Joi.number().default(0),
-  count: Joi.number().default(10),
+  count: Joi.number(),
   lang: Joi.string().default('es'),
   store: Joi.string().default('ar'),
 }).or('titleId', 'gamertag');
