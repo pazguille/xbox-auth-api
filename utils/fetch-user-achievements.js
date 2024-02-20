@@ -21,7 +21,7 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
       id = xuid;
     }
 
-    const url = gamertag ? API_URL(id, skipitems, count) : TITLE_API_URL(id, titleId);
+    const url = titleId ? TITLE_API_URL(id, titleId) : API_URL(id, skipitems, count);
     return await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
           description: achievement.description,
           image: `https://images.weserv.nl/?output=webp&url=${achievement.mediaAssets[0].url}`,
           timeUnlocked: achievement.progression.timeUnlocked,
-          rewards: achievement.rewards[0].value,
+          rewards: achievement?.rewards[0]?.value,
         }
       });
     })
