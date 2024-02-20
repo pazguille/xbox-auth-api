@@ -11,6 +11,7 @@ const paramsSchema = Joi.object({
   lang: Joi.string().default('es'),
   store: Joi.string().default('ar'),
   gamertag: Joi.string(),
+  count: Joi.number(),
 });
 
 export default async (ctx) => {
@@ -36,7 +37,7 @@ export default async (ctx) => {
     })), { status: 400 });
   }
 
-  const results = await fetchUserGames(xuid, token, query.lang, query.store, query.gamertag);
+  const results = await fetchUserGames(xuid, token, query.lang, query.store, query.gamertag, query.count);
 
   return Response.json(results, {
     status: results.code || 200,

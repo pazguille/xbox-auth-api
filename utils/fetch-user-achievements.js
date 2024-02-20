@@ -1,8 +1,28 @@
-const API_URL = (xuid, titleId) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?titleId=${titleId}`;
+const API_URL = (xuid, skipitems, count) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?orderBy=UnlockTime&skipItems=${skipitems}&maxItems=${count}`;
+const TITLE_API_URL = (xuid, titleId) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?titleId=${titleId}`;
+const GAMERTAG_2_XUID_URL = gamertag => `https://profile.xboxlive.com/users/gt(${gamertag})/settings`;
 
-export default async function fetchUserAchievements(xuid, token, titleId, lang, store) {
+export default async function fetchUserAchievements(xuid, token, lang, store, gamertag, skipitems, count, titleId) {
   try {
-    return await fetch(API_URL(xuid, titleId), {
+    let id;
+    if (gamertag) {
+      id = await fetch(GAMERTAG_2_XUID_URL(gamertag), {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `XBL3.0 x=${token}`,
+          'x-xbl-contract-version': '3',
+          'Accept-Language': `${lang}-${store}`,
+          'Accept-Encoding': 'gzip',
+        },
+      })
+      .then(response => response.json())
+      .then(response => response.profileUsers[0].id);
+    } else {
+      id = xuid;
+    }
+
+    const url = gamertag ? API_URL(id, skipitems, count) : TITLE_API_URL(id, titleId);
+    return await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `XBL3.0 x=${token}`,
@@ -12,7 +32,7 @@ export default async function fetchUserAchievements(xuid, token, titleId, lang, 
       },
     })
     .then(response => response.json())
-    .then(response => response)
+    .then(response => response.achievements)
     .catch(err => { throw { error: err.response }; });
 
   } catch (err) {

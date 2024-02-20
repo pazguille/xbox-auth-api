@@ -8,12 +8,13 @@ const cookieSchema = Joi.object({
 });
 
 const paramsSchema = Joi.object({
-  limit: Joi.number().default(100),
+  gamertag: Joi.string(),
+  count: Joi.number().default(10),
   trending: Joi.boolean().default(false),
   titleId: Joi.string(),
   lang: Joi.string().default('es'),
   store: Joi.string().default('ar'),
-});
+}).or('titleId', 'gamertag');
 
 export default async (ctx) => {
   const xuid = await ctx.cookies.get('xuid');
@@ -30,7 +31,7 @@ export default async (ctx) => {
     })), { status: 400 });
   }
 
-  const results = await fetchUserClips(xuid, token, query.lang, query.store, query.limit, query.trending, query.titleId);
+  const results = await fetchUserClips(xuid, token, query.lang, query.store, query.gamertag, query.count, query.trending, query.titleId);
 
   return Response.json(results, {
     status: results.code || 200,

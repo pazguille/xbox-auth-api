@@ -30,7 +30,26 @@ export default async function fetchUserDetail(xuid, token, lang, store, gamertag
       },
     })
     .then(response => response.json())
-    .then(response => response.people[0])
+    .then(response => {
+      const user = response.people[0];
+      return {
+        xuid: user.xuid,
+        displayName: user.displayName,
+        gamertag: user.gamertag,
+        modernGamertag: user.modernGamertag,
+        uniqueModernGamertag: user.uniqueModernGamertag,
+        displayPicRaw: user.displayPicRaw,
+        gamerScore: user.gamerScore,
+        presenceState: user.presenceState,
+        presenceText: user.presenceText,
+        lastSeenDateTimeUtc: user.lastSeenDateTimeUtc,
+        preferredColor: user.preferredColor,
+        titlePresence: user.titlePresence,
+        location: user.detail.location,
+        followers: user.detail.followerCount,
+        following: user.detail.followingCount,
+      }
+    })
     .catch(err => { throw { error: err.response }; });
 
   } catch (err) {
