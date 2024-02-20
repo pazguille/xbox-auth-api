@@ -14,7 +14,7 @@ const paramsSchema = Joi.object({
   titleId: Joi.string(),
   lang: Joi.string().default('es'),
   store: Joi.string().default('ar'),
-}).or('titleId', 'gamertag');
+}).or('titleId', 'gamertag', 'trending');
 
 export default async (ctx) => {
   const xuid = await ctx.cookies.get('xuid');

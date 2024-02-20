@@ -34,7 +34,17 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
       },
     })
     .then(response => response.json())
-    .then(response => response.gameClips)
+    .then(res => {
+      // return res;
+      return res.gameClips.map(clip => {
+        return {
+          title: clip.titleName,
+          titleId: clip.titleId,
+          poster: `https://images.weserv.nl/?output=webp&url=${clip.thumbnails[1].uri}`,
+          url: clip.gameClipUris[0].uri,
+        }
+      });
+    })
     .catch(err => { throw { error: err.response }; });
 
   } catch (err) {

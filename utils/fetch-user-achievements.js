@@ -1,4 +1,4 @@
-const API_URL = (xuid, skipitems, count) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?orderBy=UnlockTime&skipItems=${skipitems}&maxItems=${count}`;
+const API_URL = (xuid, skipitems, count) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?orderBy=UnlockTime&unlockedOnly=true&skipItems=${skipitems}&maxItems=${count}`;
 const TITLE_API_URL = (xuid, titleId) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?titleId=${titleId}`;
 const GAMERTAG_2_XUID_URL = gamertag => `https://profile.xboxlive.com/users/gt(${gamertag})/settings`;
 
@@ -32,7 +32,20 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
       },
     })
     .then(response => response.json())
-    .then(response => response.achievements)
+    .then(res => {
+      // return res.achievements;
+      return res.achievements.map(achievement => {
+        return {
+          title: achievement.titleAssociations[0].name,
+          titleId: achievement.titleAssociations[0].id,
+          name: achievement.name,
+          description: achievement.description,
+          image: `https://images.weserv.nl/?output=webp&url=${achievement.mediaAssets[0].url}`,
+          timeUnlocked: achievement.progression.timeUnlocked,
+          rewards: achievement.rewards[0].value,
+        }
+      });
+    })
     .catch(err => { throw { error: err.response }; });
 
   } catch (err) {
