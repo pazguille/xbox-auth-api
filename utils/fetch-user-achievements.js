@@ -33,7 +33,6 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
     })
     .then(response => response.json())
     .then(res => {
-      // return res.achievements;
       return res.achievements.map(achievement => {
         return {
           title: achievement.titleAssociations[0].name,
