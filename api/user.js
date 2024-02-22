@@ -34,7 +34,7 @@ export default async (ctx) => {
     status: results.code || 200,
     headers: {
       ...cors,
-      'Cache-Control': 'public, max-age=0, s-maxage=7200, stale-while-revalidate',
+      'Cache-Control': 'private, no-store, max-age=0',
     },
   });
 };

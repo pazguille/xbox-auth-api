@@ -73,7 +73,7 @@ export default async (ctx) => {
     authHeaders.append('Set-Cookie', `nickname=${data.nickname}; Domain=.xstoregames.com; Path=/; Secure; SameSite=None; Expires=${new Date(user.NotAfter).toUTCString()}`);
     authHeaders.append('Set-Cookie', `xuid=${data.xuid}; Domain=.xstoregames.com; Path=/; HttpOnly; Secure; SameSite=None; Expires=${new Date(user.NotAfter).toUTCString()}`);
     authHeaders.append('Set-Cookie', `token=${encodeURIComponent(data.token)}; Domain=.xstoregames.com; Path=/; HttpOnly; Secure; SameSite=None; Expires=${new Date(user.NotAfter).toUTCString()}`);
-    authHeaders.append('Cache-Control', 'public, no-store, max-age=0');
+    authHeaders.append('Cache-Control', 'private, no-store, max-age=0');
     authHeaders.append('Location', 'https://xstoregames.com');
 
     // return Response.json(data, {
