@@ -31,7 +31,13 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
         'Accept-Encoding': 'gzip',
       },
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw { code: response.status, statusText: response.statusText };
+      }
+    })
     .then(res => {
       return res.achievements.map(achievement => {
         return {
@@ -46,7 +52,7 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
         }
       });
     })
-    .catch(err => { throw { error: err.response }; });
+    .catch(err => { throw err; });
 
   } catch (err) {
     return err;

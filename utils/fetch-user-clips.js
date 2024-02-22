@@ -33,9 +33,14 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
         'Accept-Encoding': 'gzip',
       },
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw { code: response.status, statusText: response.statusText };
+      }
+    })
     .then(res => {
-      // return res;
       return res.gameClips.map(clip => {
         return {
           title: clip.titleName,
@@ -45,7 +50,7 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
         }
       });
     })
-    .catch(err => { throw { error: err.response }; });
+    .catch(err => { throw err; });
 
   } catch (err) {
     return err;

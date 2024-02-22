@@ -40,7 +40,13 @@ export default async function fetchUserGames(xuid, token, lang, store, gamertag,
         'Accept-Encoding': 'gzip',
       },
     })
-    .then(res => res.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw { code: response.status, statusText: response.statusText };
+      }
+    })
     .then(async res => {
       // return res.titles;
       const filtered = res.titles.reduce(function(filtered, game) {
@@ -99,7 +105,7 @@ export default async function fetchUserGames(xuid, token, lang, store, gamertag,
 
       return filtered;
     })
-    .catch(err => { throw { error: err.response }; });
+    .catch(err => { throw err; });
 
   } catch (err) {
     return err;
