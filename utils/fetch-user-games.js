@@ -22,7 +22,13 @@ export default async function fetchUserGames(xuid, token, lang, store, gamertag,
           'Accept-Encoding': 'gzip',
         },
       })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw { code: response.status, statusText: response.statusText };
+        }
+      })
       .then(response => response.profileUsers[0].id);
     } else {
       id = xuid;

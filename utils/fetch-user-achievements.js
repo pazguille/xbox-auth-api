@@ -15,7 +15,13 @@ export default async function fetchUserAchievements(xuid, token, lang, store, ga
           'Accept-Encoding': 'gzip',
         },
       })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw { code: response.status, statusText: response.statusText };
+        }
+      })
       .then(response => response.profileUsers[0].id);
     } else {
       id = xuid;
