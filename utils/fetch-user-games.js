@@ -97,7 +97,7 @@ export default async function fetchUserGames(xuid, token, lang, store, gamertag,
           'Accept-Language': `${lang}-${store}`,
           'Accept-Encoding': 'gzip',
         },
-        body: `{"arrangebyfield":"xuid","xuids":["${xuid}"],"stats":${JSON.stringify(stats)}}`,
+        body: `{"arrangebyfield":"xuid","xuids":["${id}"],"stats":${JSON.stringify(stats)}}`,
       })
       .then(response => response.json())
       .then(res => res.statlistscollection[0].stats.map(stat => ({ titleId: stat.titleid, min: stat.value })));
