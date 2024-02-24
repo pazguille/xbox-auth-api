@@ -29,11 +29,10 @@ export default async (ctx) => {
   }
 
   const results = await fetchUserDetail(xuid, token, query.lang, query.store, query.gamertag);
-
   return Response.json(results, {
     status: results.code || 200,
     headers: {
-      ...cors,
+      ...cors(ctx),
       'Cache-Control': 'private, no-store, max-age=0',
     },
   });

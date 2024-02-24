@@ -42,7 +42,7 @@ export default async (ctx) => {
     return new Response(null, {
       status: 307,
       headers: {
-        ...cors,
+        ...cors(ctx),
         Location: authorizeUrl,
       },
    });
@@ -69,7 +69,7 @@ export default async (ctx) => {
       token: `${user.DisplayClaims.xui[0].uhs};${user.Token}`,
     };
 
-    const authHeaders = new Headers({ ...cors });
+    const authHeaders = new Headers({ ...cors(ctx) });
     authHeaders.append('Set-Cookie', `nickname=${data.nickname}; Domain=.xstoregames.com; Path=/; Secure; SameSite=None; Expires=${new Date(user.NotAfter).toUTCString()}`);
     authHeaders.append('Set-Cookie', `xuid=${data.xuid}; Domain=.xstoregames.com; Path=/; HttpOnly; Secure; SameSite=None; Expires=${new Date(user.NotAfter).toUTCString()}`);
     authHeaders.append('Set-Cookie', `token=${encodeURIComponent(data.token)}; Domain=.xstoregames.com; Path=/; HttpOnly; Secure; SameSite=None; Expires=${new Date(user.NotAfter).toUTCString()}`);
@@ -86,6 +86,4 @@ export default async (ctx) => {
       headers: authHeaders,
     });
   }
-
-
 };

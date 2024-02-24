@@ -44,7 +44,7 @@ export default async (ctx) => {
   return Response.json(results, {
     status: results.code || 200,
     headers: {
-      ...cors,
+      ...cors(ctx),
       'Cache-Control': 'private, no-store, max-age=0',
     },
   });
