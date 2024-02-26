@@ -1,4 +1,5 @@
-const API_URL = (xuid, count) => `https://gameclipsmetadata.xboxlive.com/users/xuid(${xuid})/clips${count ? `?maxItems=${count}` : ''}`;
+// const API_URL = (xuid, count) => `https://gameclipsmetadata.xboxlive.com/users/xuid(${xuid})/clips${count ? `?maxItems=${count}` : ''}`;
+const API_URL = (id, count) => `https://avty.xboxlive.com/users/xuid(${id})/activity/history/unshared?activityTypes=GameDVR${count?`&numItems=${count}` : ''}`;
 const PUBLIC_API_URL = (count) => `https://gameclipsmetadata.xboxlive.com/public/trending/clips?qualifier=created${count ? `?maxItems=${count}` : ''}`;
 const TITLE_API_URL = (titleId, count) => `https://gameclipsmetadata.xboxlive.com/public/titles/${titleId}/clips?qualifier=created${count ? `&maxItems=${count}` : ''}`;
 const GAMERTAG_2_XUID_URL = gamertag => `https://profile.xboxlive.com/users/gt(${gamertag})/settings`;
@@ -47,12 +48,12 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
       }
     })
     .then(res => {
-      return res.gameClips.map(clip => {
+      return res.activityItems.map(clip => {
         return {
-          title: clip.titleName,
+          title: clip.contentTitle,
           titleId: clip.titleId,
-          poster: `https://images.weserv.nl/?output=webp&url=${clip.thumbnails[1].uri}`,
-          url: clip.gameClipUris[0].uri,
+          poster: `https://images.weserv.nl/?output=webp&url=${clip.clipThumbnail}`,
+          url: clip.downloadUri,
         }
       });
     })

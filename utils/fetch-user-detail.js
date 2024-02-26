@@ -50,7 +50,7 @@ export default async function fetchUserDetail(xuid, token, lang, store, gamertag
         gamertag: user.gamertag,
         modernGamertag: user.modernGamertag,
         uniqueModernGamertag: user.uniqueModernGamertag,
-        displayPicRaw: user.displayPicRaw,
+        displayPicRaw: `https://images.weserv.nl/?output=webp&width=310&height=310&url=${user.displayPicRaw}`,
         gamerScore: user.gamerScore,
         presenceState: user.presenceState,
         presenceText: user.presenceText,

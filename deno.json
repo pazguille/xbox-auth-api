@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --allow-read=.env,.env.defaults,.env.example --allow-net=0.0.0.0:8081,login.live.com,user.auth.xboxlive.com,xsts.auth.xboxlive.com,peoplehub.xboxlive.com,titlehub.xboxlive.com,gameclipsmetadata.xboxlive.com,achievements.xboxlive.com,profile.xboxlive.com,userstats.xboxlive.com --allow-env=PORT,CLIENT_ID,SECRET_ID --watch main.js",
-    "start": "deno run --allow-read=.env,.env.defaults,.env.example --allow-net=0.0.0.0:80,login.live.com,user.auth.xboxlive.com,xsts.auth.xboxlive.com,peoplehub.xboxlive.com,titlehub.xboxlive.com,gameclipsmetadata.xboxlive.com,achievements.xboxlive.com,profile.xboxlive.com,userstats.xboxlive.com --allow-env=PORT,CLIENT_ID,SECRET_ID main.js"
+    "dev": "deno run --allow-read=.env,.env.defaults,.env.example --allow-net=0.0.0.0:8081,login.live.com,user.auth.xboxlive.com,xsts.auth.xboxlive.com,peoplehub.xboxlive.com,titlehub.xboxlive.com,gameclipsmetadata.xboxlive.com,achievements.xboxlive.com,profile.xboxlive.com,userstats.xboxlive.com,avty.xboxlive.com --allow-env=PORT,CLIENT_ID,SECRET_ID --watch main.js",
+    "start": "deno run --allow-read=.env,.env.defaults,.env.example --allow-net=0.0.0.0:80,login.live.com,user.auth.xboxlive.com,xsts.auth.xboxlive.com,peoplehub.xboxlive.com,titlehub.xboxlive.com,gameclipsmetadata.xboxlive.com,achievements.xboxlive.com,profile.xboxlive.com,userstats.xboxlive.com,avty.xboxlive.com --allow-env=PORT,CLIENT_ID,SECRET_ID main.js"
   },
   "importMap": "./import_map.json"
 }
