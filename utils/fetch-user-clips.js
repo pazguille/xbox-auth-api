@@ -1,5 +1,5 @@
 const API_URL = (id, count) => `https://avty.xboxlive.com/users/xuid(${id})/activity/history/unshared?activityTypes=GameDVR${count?`&numItems=${count}` : ''}`;
-const CLIPS_API_URL = (xuid, count) => `https://gameclipsmetadata.xboxlive.com/users/xuid(${xuid})/clips${count ? `?maxItems=${count}` : ''}`;
+const CLIPS_API_URL = (id, count) => `https://gameclipsmetadata.xboxlive.com/users/xuid(${id})/clips${count ? `?maxItems=${count}` : ''}`;
 const PUBLIC_API_URL = (count) => `https://gameclipsmetadata.xboxlive.com/public/trending/clips?qualifier=created${count ? `?maxItems=${count}` : ''}`;
 const TITLE_API_URL = (titleId, count) => `https://gameclipsmetadata.xboxlive.com/public/titles/${titleId}/clips?qualifier=created${count ? `&maxItems=${count}` : ''}`;
 const GAMERTAG_2_XUID_URL = gamertag => `https://profile.xboxlive.com/users/gt(${gamertag})/settings`;
@@ -66,20 +66,22 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
         });
     } else {
       const allClips = await Promise.all([
-        fetchClips(API_URL(id, count), token, lang, store),
         fetchClips(CLIPS_API_URL(id, count), token, lang, store),
+        // fetchClips(API_URL(id, count), token, lang, store),
+
       ]);
 
-      const activityItems = allClips[0].activityItems.map(clip => {
-        return {
-          clipId: clip.clipId,
-          title: clip.contentTitle,
-          titleId: clip.titleId,
-          poster: `https://images.weserv.nl/?output=webp&url=${clip.clipThumbnail}`,
-          url: clip.downloadUri,
-        }
-      });
-      const gameClips = allClips[1].gameClips.map(clip => {
+      // const activityItems = allClips[1].activityItems.map(clip => {
+      //   return {
+      //     clipId: clip.clipId,
+      //     title: clip.contentTitle,
+      //     titleId: clip.titleId,
+      //     poster: `https://images.weserv.nl/?output=webp&url=${clip.clipThumbnail}`,
+      //     url: clip.downloadUri,
+      //   }
+      // });
+
+      const gameClips = allClips[0].gameClips.map(clip => {
         return {
           clipId: clip.gameClipId,
           title: clip.titleName,
@@ -89,14 +91,16 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
         }
       });
 
-      const clips = [...activityItems, ...gameClips].reduce((acc, clip) => {
-        if (acc.findIndex(c => c.clipId === clip.clipId) === -1) {
-          acc.push(clip);
-        }
-        return acc;
-      }, []);
+      return gameClips;
 
-      return clips;
+      // const clips = [...activityItems, ...gameClips].reduce((acc, clip) => {
+      //   if (acc.findIndex(c => c.clipId === clip.clipId) === -1) {
+      //     acc.push(clip);
+      //   }
+      //   return acc;
+      // }, []);
+
+      // return clips;
     }
   } catch (err) {
     return err;
