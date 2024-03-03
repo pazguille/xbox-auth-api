@@ -1,4 +1,4 @@
-const API_URL = (xuid, skipitems, count) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?orderBy=UnlockTime&unlockedOnly=true&skipItems=${skipitems}&maxItems=${count}`;
+const API_URL = (xuid, skipitems, count) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?orderBy=EndingSoon&unlockedOnly=true&skipItems=${skipitems}&maxItems=${count}`;
 const TITLE_API_URL = (xuid, titleId) => `https://achievements.xboxlive.com/users/xuid(${xuid})/achievements?titleId=${titleId}`;
 const GAMERTAG_2_XUID_URL = gamertag => `https://profile.xboxlive.com/users/gt(${gamertag})/settings`;
 
