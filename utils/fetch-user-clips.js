@@ -80,7 +80,7 @@ export default async function fetchUserClips(xuid, token, lang, store, gamertag,
         const clips = Array.from(document.querySelectorAll('.download-wrap a')).map(a => {
           return {
             title: a.children[0].innerText.replace('\n\nVideo\n\n', '').trimEnd(),
-            poster: a.dataset.bg.replace('url(', '').replace(')', ''),
+            poster: `https://images.weserv.nl/?output=webp&url=${a.dataset.bg.replace('url(', '').replace(')', '')}`,
             url: a.dataset.url,
           }
         });
